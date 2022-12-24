@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text&family=Roboto:wght@300&display=swap');
+
+:root {
+  --max-width: 1250px;
+  --width: 90%;
+  --white: #ffffff;
+  --empty: transparent;
+}
+
+.anim--enter {
+  opacity: 0;
+}
+.anim--enter-active {
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
+}
+.anim--enter-done {
+  opacity: 1;
+}
+
+.anim--exit {
+  opacity: 1;
+}
+.anim--exit-active {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+.anim--exit-done {
+  opacity: 0;
+}
