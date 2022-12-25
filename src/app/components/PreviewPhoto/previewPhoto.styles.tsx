@@ -16,6 +16,7 @@ export const Style = {
     overflow: hidden;
     position: relative;
     transition: border-radius 0.4s linear;
+    border: 0.5px solid rgba(0,0,0,0.2);
 
     figcaption {
       display: none;
@@ -24,7 +25,7 @@ export const Style = {
     img {
       position: absolute;
       display: grid;
-      min-height: ${({ size }: Props) => `${size}px`};;
+      min-height: 100%;
       place-items: center;
       cursor: pointer;
       transition: scale 0.4s linear;
