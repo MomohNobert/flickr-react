@@ -23,7 +23,7 @@ function PreviewPhoto({ imageDetails, previewSize, handleClick }: PreviewPhotoPr
         <figcaption>{imageDetails.title}</figcaption>
       </figure>
       <article>
-        <p><span>title: </span>{imageDetails.title}</p>
+        <p><span>title: </span>{imageDetails.title?.length! <= 15 ? imageDetails.title : `${imageDetails.title?.slice(0, 15)}...`}</p>
         <p><span>owned by: </span>{imageDetails.owner}</p>
       </article>
     </Style.Container>
