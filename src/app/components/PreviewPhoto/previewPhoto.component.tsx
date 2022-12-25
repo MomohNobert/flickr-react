@@ -13,13 +13,19 @@ export interface PreviewPhotoProps {
 function PreviewPhoto({ imageDetails, previewSize, handleClick }: PreviewPhotoProps) {
   return (
     <Style.Container size={previewSize} onClick={handleClick}>
-      <Image
-        src={flickrImageFormatter(imageDetails)}
-        alt={imageDetails.title ?? "There is no available title"}
-        width={previewSize}
-        height={previewSize}
-      />
-      <figcaption>{imageDetails.title}</figcaption>
+      <figure>
+        <Image
+          src={flickrImageFormatter(imageDetails)}
+          alt={imageDetails.title ?? "There is no available title"}
+          width={previewSize}
+          height={previewSize}
+        />
+        <figcaption>{imageDetails.title}</figcaption>
+      </figure>
+      <article>
+        <p><span>title: </span>{imageDetails.title}</p>
+        <p><span>owned by: </span>{imageDetails.owner}</p>
+      </article>
     </Style.Container>
   )
 }

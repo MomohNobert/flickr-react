@@ -4,4 +4,5 @@ export interface Photo {
   id: string;
   secret: string;
   title?: string;
+  owner?: string;
 }

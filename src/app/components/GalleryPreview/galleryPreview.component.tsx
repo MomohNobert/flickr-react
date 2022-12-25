@@ -21,14 +21,15 @@ function GalleryPreview({ title, subtitle, images = [], previewSize }: GalleryPr
   const [currentView, setCurrentView] = useState(1);
   const [currentImage, setCurrentImage] = useState("");
   const { toggle, modal } = useModal();
+  console.log("IMAGES>>", images)
 
-  let animationLength = (previewSize * 3) + 100;
+  let animationLength = (previewSize * 4) + 100;
 
   function forwardAnimation() {
-    if (currentView && currentView <= 2) {
+    if (currentView && currentView <= 4) {
       animationLength = animationLength * currentView;
       setCurrentView(prevCurrentView => prevCurrentView + 1);
-    } else if (currentView >= 2) {
+    } else if (currentView >= 4) {
       animationLength = 0;
       setCurrentView(1);
     }
@@ -60,7 +61,7 @@ function GalleryPreview({ title, subtitle, images = [], previewSize }: GalleryPr
           ref={imagesRef}
         >
           {images
-            .slice(0, 10)
+            .slice(0, 20)
             .map(photo =>
               <PreviewPhoto
                 previewSize={previewSize ?? 300}
