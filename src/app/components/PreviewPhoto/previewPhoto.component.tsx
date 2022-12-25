@@ -7,11 +7,12 @@ import Image from 'next/image'
 export interface PreviewPhotoProps {
   imageDetails: Photo,
   previewSize: number,
+  handleClick: () => void;
 }
 
-function PreviewPhoto({ imageDetails, previewSize }: PreviewPhotoProps) {
+function PreviewPhoto({ imageDetails, previewSize, handleClick }: PreviewPhotoProps) {
   return (
-    <Style.Container size={previewSize}>
+    <Style.Container size={previewSize} onClick={handleClick}>
       <Image
         src={flickrImageFormatter(imageDetails)}
         alt={imageDetails.title ?? "There is no available title"}
