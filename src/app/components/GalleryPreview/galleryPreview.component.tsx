@@ -4,7 +4,10 @@ import PreviewPhoto from "../PreviewPhoto/previewPhoto.component";
 import { Style } from "./galleryPreview.styles";
 
 import gsap from "gsap";
-import { useCallback, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import useModal from "../../shared/Modal/useModal";
+import Modal from "../../shared/Modal/modal.component";
+import ImageViewer from "../../containers/ImageViewer/imageViewer.component";
 
 interface GalleryPreviewProps {
   title: string,
@@ -16,6 +19,9 @@ interface GalleryPreviewProps {
 function GalleryPreview({ title, subtitle, images = [], previewSize }: GalleryPreviewProps) {
   const imagesRef = useRef(null);
   const [currentView, setCurrentView] = useState(1);
+  const [currentImage, setCurrentImage] = useState("");
+  const { toggle, modal } = useModal();
+
   let animationLength = (previewSize * 3) + 100;
 
   function forwardAnimation() {
@@ -30,28 +36,50 @@ function GalleryPreview({ title, subtitle, images = [], previewSize }: GalleryPr
     gsap.to(imagesRef.current, { x: `-${animationLength}px` });
   };
 
+  function showImageViewer(imageId: string) {
+    setCurrentImage(imageId);
+    toggle();
+  }
 
-  console.log("current view >>>>>>", currentView)
-  console.log("animation length >>>>", animationLength)
+
 
   return (
-    <Style.Container>
-      <article className="gallery-preview-header">
-        <hgroup>
-          <h2>{title}</h2>
-          <p>{subtitle}</p>
-        </hgroup>
-        <NavigationPreview
-          handleForwardClick={forwardAnimation}
+    <>
+      <Style.Container>
+        <article className="gallery-preview-header">
+          <hgroup>
+            <h2>{title}</h2>
+            <p>{subtitle}</p>
+          </hgroup>
+          <NavigationPreview
+            handleForwardClick={forwardAnimation}
+          />
+        </article>
+        <article
+          className="gallery-preview-content"
+          ref={imagesRef}
+        >
+          {images
+            .slice(0, 10)
+            .map(photo =>
+              <PreviewPhoto
+                previewSize={previewSize ?? 300}
+                key={photo.id}
+                imageDetails={photo}
+                handleClick={() => showImageViewer(photo.id)}
+              />
+            )
+          }
+        </article>
+      </Style.Container>
+
+      <Modal modal={modal} toggle={toggle} hideClose>
+        <ImageViewer
+          collection={images}
+          currentImage={currentImage}
         />
-      </article>
-      <article
-        className="gallery-preview-content"
-        ref={imagesRef}
-      >
-        {images.slice(0, 10).map(photo => <PreviewPhoto previewSize={previewSize ?? 300} key={photo.id} imageDetails={photo} />)}
-      </article>
-    </Style.Container>
+      </Modal>
+    </>
   )
 }
 
