@@ -27,5 +27,20 @@ export const Style = {
         }
       }
     }
+
+    article.image-viewer-preview {
+      display: flex;
+      height: 20%;
+      display: flex;
+      justify-content: space-between;
+
+      figure {
+        max-height: 100%;
+
+        img {
+          max-height: 100%;
+        }
+      }
+    }
   `
 }
